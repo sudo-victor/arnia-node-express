@@ -3,7 +3,7 @@ const bancoDadosObj = new Array()
 // Crie uma Factory Function para gerar um usuário
 
 function createUser(name, age, bancoDados){
-  // utilizar factory function para criar um usuário
+  // Crie uma factory function(fora da função) para criar um usuário
 }
 
 function findOneUser (index, bancoDados) {
