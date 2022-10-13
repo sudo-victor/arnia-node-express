@@ -10,13 +10,13 @@ function carFactory({ name, year, color, price }) {
     }
 }
 
-// Dica: para acessar o bancoDados devem utilizar o THIS
+// Dica: para manipular o banco de dados devem utilizar o THIS
 
 function repository(database) {
     return {
         db: database,
 
-        // deve ser passado os PARÂMETROS ({ name, year, color, price } à função, GERAR um carro(com a FACTORY FUNCTION) e PERSISTIR no bancoDados
+        // deve ser passado os PARÂMETROS ({ name, year, color, price } à função, GERAR um carro(com a FACTORY FUNCTION) e PERSISTIR no banco de dados
         create: this,
 
         // deve ser capaz de RETORNAR todos os dados PERSISTIDOS
@@ -33,7 +33,7 @@ function repository(database) {
         // deve ser passado o PARÂMETRO (name) e RETORNAR o objeto que tenham o mesmo nome
         findOneByName: null,
 
-        // deve ser passado o PARÂMETRO (year) e atualizar o atributo SOLD(vendido) de um objeto no bancoDados
+        // deve ser passado os PARÂMETROS (carName, ownerName) e atualizar os atributos (name, owner, sold) de um objeto no banco de dados
         updateOwner: null,
 
     }
