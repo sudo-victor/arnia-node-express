@@ -1,10 +1,10 @@
 
-function carFactory({ name, year, color, price }) {
+function carFactory({ carName, carYear, carColor, carPrice }) {
     return {
-        name,
-        year,
-        color,
-        price,
+        name: carName,
+        year: carYear,
+        color: carColor,
+        price: carPrice,
         sold: false,
         owner: null
     }
@@ -17,24 +17,44 @@ function repository(database) {
         db: database,
 
         // deve ser passado os PARÂMETROS ({ name, year, color, price } à função, GERAR um carro(com a FACTORY FUNCTION) e PERSISTIR no bancoDados
-        create: this,
+        create: function({ name, year, color, price }) {
+            this.db.push(carFactory({name, year, color, price}))
+        },
 
         // deve ser capaz de RETORNAR todos os dados PERSISTIDOS
-        findAll: () => {
+        findAll: function() {
             return this.db;
         },
 
         // deve ser passado o PARÂMETRO (year) e retornar todos os dados que tenham o mesmo ano
-        findAllByYear: null,
+        findAllByYear: function(year) {
+            return this.db.filter((car) => car.year === year)
+        },
 
         // deve ser capaz de RETORNAR todos os carros vendidos
-        findAllSold: null,
+        findAllSold: function() {
+            return this.db.filter((car) => car.sold)
+        },
 
         // deve ser passado o PARÂMETRO (name) e RETORNAR o objeto que tenham o mesmo nome
-        findOneByName: null,
+        findOneByName: function(name) {
+            return this.db.find((car) => car.name === name)
+        },
 
-        // deve ser passado o PARÂMETRO (year) e atualizar o atributo SOLD(vendido) de um objeto no bancoDados
-        updateOwner: null,
+        // deve ser passado os PARÂMETROS (carName, ownerName) e atualizar os atributos (name, owner, sold) de um objeto no bancoDados
+        updateOwner: function(carName, ownerName) {
+            this.db = this.db.map((car) => {
+                if (car.name === carName) {
+                    return {
+                        ...car,
+                        sold: true,
+                        owner: ownerName
+                    }
+                }
+
+                return car
+            })
+        },
 
     }
 }
