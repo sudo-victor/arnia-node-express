@@ -13,14 +13,14 @@ const agendamentos = [
 // se comportando igual a factory function 
 
 
-// Crie uma função para verificar se já existe um agendamento
+// Crie uma função para verificar se já existe algum agendamento
 // com a data e o horário de inicio passados pelo parâmetro
 // Parâmetros: data, horaInicio
 // Retorno: boolean(true/false)
 // Plus: Caso tenha feito a classe Agendamento,
 // replique essa função no formato de método
 
-// Crie um namespace function que retorna funções de conversão do Real para outras moedas
+// Crie um namespace function que retorne funções de conversão do Real para outras moedas
 // Parâmetro: valor
 // Retorno: { paraDolar, paraEuro }
 // Obs: 1 dolar === 5,30 reais   e   1 euro === 5,16 real
