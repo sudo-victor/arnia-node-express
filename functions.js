@@ -10,9 +10,10 @@ function carFactory({ carName, carYear, carColor, carPrice }) {
     }
 }
 
-// Dica: para acessar o bancoDados devem utilizar o THIS
+// Dica: para manipular o banco de dados devem utilizar o THIS
 
 function repository(database) {
+    const db = []
     return {
         db: database,
 
@@ -43,24 +44,26 @@ function repository(database) {
 
         // deve ser passado os PARÂMETROS (carName, ownerName) e atualizar os atributos (name, owner, sold) de um objeto no bancoDados
         updateOwner: function(carName, ownerName) {
-            this.db = this.db.map((car) => {
-                if (car.name === carName) {
-                    return {
-                        ...car,
-                        sold: true,
-                        owner: ownerName
-                    }
-                }
+            const car = this.db.find((c) => c.name === carName)
 
-                return car
-            })
+            if (car) {
+                car.owner = ownerName;
+                car = true;
+            }
         },
 
     }
 }
 
 const cars = []
+const products = []
 const carRepository = repository(cars)
+const product = repository(products)
+
+// carRepository.create({ name: 'Fiat Uno', year: 2020, color: 'gray', price: 15000 })
+// carRepository.create({ name: 'Drako GTE', year: 2019, color: 'red', price: 6197115 })
+// carRepository.create({ name: 'Gordon Murray T.33', year: 2020, color: 'black', price: 8779247 })
+// carRepository.create({ name: 'Gordon Murray T.33', year: 2020, color: 'black', price: 8779247 })
 
 carRepository.create({ name: 'Fiat Uno', year: 2020, color: 'gray', price: 15000 })
 carRepository.create({ name: 'Drako GTE', year: 2019, color: 'red', price: 6197115 })
@@ -71,10 +74,10 @@ carRepository.updateOwner('Fiat Uno', 'Pedro Souza')
 carRepository.updateOwner('Drako GTE', 'Rafael Vinicios')
 carRepository.updateOwner('Gordon Murray T.33', 'Lucas Perdigão')
 
-console.log(userRepository.findOneByName('Fiat Uno'))
-console.log('\n\n\n')
-console.log(userRepository.findAllByYear(2020))
-console.log('\n\n\n')
-console.log(userRepository.findAllSold())
-console.log('\n\n\n')
-console.log(userRepository.findAll())
+// console.log(userRepository.findOneByName('Fiat Uno'))
+// console.log('\n\n\n')
+// console.log(userRepository.findAllByYear(2020))
+// console.log('\n\n\n')
+// console.log(userRepository.findAllSold())
+// console.log('\n\n\n')
+// console.log(userRepository.findAll())
