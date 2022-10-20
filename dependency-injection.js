@@ -11,11 +11,23 @@
 
 
 
-
-
-
 // CRIE A CLASSE AQUI
+new UserModel( )
+class UserModel {
+    constructor( name, email, password ) {
+        this.name = name;
+        this.email = email;
+        this.id = Math.floor(Math.random * id)
+    }
 
+    encryptPassword(pass) {
+        this.password = pass.split('').join('asdasdasdasd');
+    }
+
+    decryptPassword() {
+        return this.password.split('asdasdasdasd').join('');
+    }
+}
 
 
 
@@ -35,33 +47,61 @@
 
 
 
-
-
 // CRIE A CLASSE AQUI
 
+class Repository {
+    constructor( database, model ) {
+        this.database = database;
+        this.model = model;
+    }
+
+    findOne( id ) {
+        const model = this.database.find((m) => m.id === id);
+        return this.database[id];
+    }
+
+    findAll() {
+        return this.database;
+    }
+
+    create(...props) {
+        const model = new this.model(...props);
+        this.database.push(model);
+        return model;
+    }
+
+    update(id, props) {
+        const model = this.database.find((m) => m.id === id);
+        Object.assign(model, props);
+        this.database[id] = model;
+        return model;
+    }
+
+    remove(id) {
+        const modelIndex = this.database.findIndex(m => m.id === id)
+        this.database.splice(modelIndex, 1);
+        return modelIndex;
+    }
+}
 
 
 
 
+const users = [];
+const userRepository = new Repository(users, UserModel);
 
+userRepository.create('Victor de Souto', 'vs@email.com', '123456');
+userRepository.create('João Vitor Gonçalves', 'jv@email.com', '123456');
+userRepository.create('Thiago Menezes', 'tm@email.com', '123456');
+userRepository.update(userRepository.findAll()[1].id, { name: 'Thiago' });
+userRepository.remove(userRepository.findAll()[0].id);
 
-
-
-// const users = [];
-// const userRepository = new Repository(users, UserModel);
-
-// userRepository.create('Victor de Souto', 'vs@email.com', '123456');
-// userRepository.create('João Vitor Gonçalves', 'jv@email.com', '123456');
-// userRepository.create('Thiago Menezes', 'tm@email.com', '123456');
-// userRepository.update(userRepository.findAll()[1].id, { name: 'Thiago' });
-// userRepository.remove(userRepository.findAll()[0].id);
-
-// console.log('\n\n')
-// console.log('ACHAR O PRIMEIRO USUÁRIO')
-// console.log(userRepository.findOne(userRepository.findAll()[0].id));
-// console.log('\n\n')
-// console.log('PEGAR TODOS OS USUÁRIOS')
-// console.log(userRepository.findAll());
+console.log('\n\n')
+console.log('ACHAR O PRIMEIRO USUÁRIO')
+console.log(userRepository.findOne(userRepository.findAll()[0].id));
+console.log('\n\n')
+console.log('PEGAR TODOS OS USUÁRIOS')
+console.log(userRepository.findAll());
 
 
 
