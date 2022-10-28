@@ -13,6 +13,9 @@ const { ObjectId } = require("mongodb");
 //         Parâmetro: collection(string), data(object)
 //         Retorno: 
 
-class MongoRepository {}
+class MongoRepository {
+}
+
+// new MongoRepository(client.db("sample_airbnb"))
 
 module.exports = { MongoRepository };

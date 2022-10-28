@@ -6,9 +6,15 @@ const { csvData } = require('./csv.script');
 config();
 
 async function script() {
+    const url = process.env.MONGODB;
+    const client = new MongoClient(url);
+
+    const service = mainFactory()
+
     // Instancie as variáveis de configruaçao do banco de dados
     console.log("Variaveis globais instanciadas");
 
+    await client.connect()
     // Instancie o serviço e suas camadas
     console.log("camada de serviços instanciada");
 

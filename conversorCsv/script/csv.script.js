@@ -17,7 +17,43 @@ const path = require('path');
 // },
 
 function csvDataFormatted() {
+    const filePath = path.join(__dirname, '../data/pokemons.csv');
+    const csvText = fs.readFileSync(filePath, 'utf8');
+    const formattedData = csvText.replace(/\n\r|\n|\n\n/g, "\n").split('\n');
+    
+    formattedData.shift();
 
+    return formattedData.map((pokemon) => {
+        const [
+            id,
+            name,
+            type_1,
+            type_2,
+            total,
+            hp,
+            attack,
+            defense,
+            sp_atk,
+            sp_def,
+            speed,
+            generation,
+            legendary
+        ] = pokemon.split(',');
+
+        return {
+            name,
+            type: `${type_1} ${type_2}`,
+            total,
+            hp,
+            attack,
+            defense,
+            sp_atk,
+            sp_def,
+            speed,
+            generation,
+            legendary: legendary === "False" ? false : true
+        }
+    })
 }
 
 const csvData = csvDataFormatted();
