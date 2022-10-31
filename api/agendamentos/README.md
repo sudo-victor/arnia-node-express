@@ -12,15 +12,15 @@
 
 ## Checklist da API de agendamentos
 
-[ ] - Rota
-[ ] - Model
-[ ] - Repository
-[ ] - Service
-[ ] - Controller
-[ ] - Model Test (Plus)
-[ ] - Repository Test (Plus)
-[ ] - Service Test (Plus)
-[ ] - Controller Test (Plus)
+ - [ ] Rota
+ - [ ] Model
+ - [ ] Repository
+ - [ ] Service
+ - [ ] Controller
+ - [ ] Model Test (Plus)
+ - [ ] Repository Test (Plus)
+ - [ ] Service Test (Plus)
+ - [ ] Controller Test (Plus)
 
 ## Reláto de stackholder
 Eu sou uma manicure e gostaria de algum sistema para gerenciar o AGENDAMENTO
