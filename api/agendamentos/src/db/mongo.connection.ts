@@ -4,14 +4,14 @@ const mongo = process.env.MONGODB as string
 
 export function connectMongo() {
     connection
-        .once('error', (error) => {
+        .on('error', (error) => {
             console.log('connection error: ' + error)
         })
-        .once('close', () => {
+        .on('close', () => {
             console.log('close connection')
         })
-        .once('open', () => {
-            console.log('conectou')
+        .on('open', () => {
+            console.log('connection')
         })
 
     connect(mongo)

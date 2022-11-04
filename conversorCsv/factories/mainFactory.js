@@ -4,4 +4,4 @@ function mainFactory() {
     return service
 }
 
-module.exports = {}
+module.exports = { service }
