@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 config();
+
 import express from 'express';
 import { connectMongo } from './db/mongo.connection';
 
