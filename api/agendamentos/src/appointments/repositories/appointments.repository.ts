@@ -1,13 +1,27 @@
 import { Model } from "mongoose";
 import { Appointment } from "../models/appointment.model";
 
+/**
+ * Rafael: 10:30 até 11:00
+ * Victor: 10:40 até 11:30
+ * start < 10:40 < end
+ * OR
+ * Robson: 13:30 até 14:00
+ * Victor: 12:00 até 13:40
+ * start < 10:40 < end
+*/
+// Greates than and equal
+// Less than and equal
+// SELECT * FROM appointemnts
+// WHERE appointments.start <= '13:30' AND appoitments.end >= '14:00'
+
 export class AppointmentRepository {
     constructor(
         private readonly appointmentModel: Model<Appointment>
     ) {}
 
-    async find() {
-        const appointments = await this.appointmentModel.find();
+    async find(): Promise<Appointment[]> {
+        const appointments = await this.appointmentModel.find().populate('customer');
         appointments.filter((appointment) => {
             const formattedStart = new Date(appointment.start as number);
             formattedStart.getDay()
@@ -16,54 +30,37 @@ export class AppointmentRepository {
         return appointments;
     }
 
-    async findById(id: number) {
-        const appointments = await this.appointmentModel.findById(id);
-        return appointments;
+    async findById(id: number): Promise<Appointment | null> {
+        const appointment = await this.appointmentModel.findById(id);
+        return appointment;
     }
 
-/**
- * Robson marcou das 20:30 até as 22:00
- * Eu tentei marcar das 20:40 até as 22:10
- * 
- * 
- * 20:30 < 20:40 < 22:00
- * start < formattedEnd < end
- * 
- * 
- * Pedro marcou das 10:30 até as 11:00
- * Eu tentei marcar das 9:00 até as 10:45
- * 10:30 < 10:45 > 11:00
- * 
- * and or
- * 
- */
-
-    async findByDate(myStart: Date, myEnd: Date) {
+    async findByDate(myStart: number, myEnd: number): Promise<Appointment[]> {
         const appointments = await this.appointmentModel.find({
             $or: [
                 {
                     $and: [
-                        { start: { $lte: myStart } },
-                        { end: { $gte: myStart } },
+                        { start: { $gte: myStart } },
+                        { end: { $lte: myStart } },
                     ]
                 },
                 {
                     $and: [
-                        { start: { $lte: myEnd } },
-                        { end: { $gte: myEnd } },
+                        { start: { $gte: myEnd } },
+                        { end: { $lte: myEnd } },
                     ]
-                }
+                },
             ]
         });
-
         return appointments;
     }
 
-    async create(appointmentToCreate: any) {
+    async create(appointmentToCreate: any): Promise<Appointment> {
         const appointment = await this.appointmentModel.create(appointmentToCreate)
+        return appointment;
     }
 
-    async remove(id: number) {
-        this.appointmentModel.remove({ id })
+    async remove(id: number): Promise<void>  {
+        await this.appointmentModel.remove({ id })
     }
 }

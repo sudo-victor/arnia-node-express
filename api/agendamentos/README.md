@@ -1,5 +1,6 @@
 ### MVP - Minimun Viable Product
 ### DDD - Domain Drive Development
+### DTO - Data Transfer Object
 
 # Api Agendamento
 
@@ -54,12 +55,24 @@ para dar desconto a eles e mandar wpp se tiver alguma promoção.
 
 ### Fazer alterações no agendamento
 
+// Find by id
 - verificar se existe o agendamento
 - caso não tenha agendamento, retornar erro
+
+// Find com query
 - verificar se existe algum agendamento naquele horário
 - caso não tenha agendamento, retornar erro
+
+// Update
 - atualizar agendamento
 
 ### AGENDAMENTOS
 
 link modelagem: https://lucid.app/lucidchart/337837bb-30dd-4b11-87ea-f48e6a3f191d/edit?view_items=FTo5~wvrkN-F&invitationId=inv_c9e08677-72c5-4f18-a72d-f0b831820ae1
+
+# Model
+# Repository
+# Service
+# Controller
+# Factory
+# Route
